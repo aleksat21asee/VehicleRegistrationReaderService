@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VehicleRegistrationReaderService.MUP;
 
 namespace VehicleRegistrationReaderService.Controllers
 {
@@ -16,7 +17,7 @@ namespace VehicleRegistrationReaderService.Controllers
         [Route("test")]
         public async Task<ActionResult<string>> GetTest()
         {
-            return  Ok("works");
+            return Ok("Service is running succesfully");
         }
     }
 }

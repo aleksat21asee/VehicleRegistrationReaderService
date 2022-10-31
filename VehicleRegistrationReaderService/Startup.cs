@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using VehicleRegistrationReaderService.Models.Exceptions;
 using VehicleRegistrationReaderService.MUP;
 
 namespace VehicleRegistrationReaderService
@@ -59,12 +60,41 @@ namespace VehicleRegistrationReaderService
 
         private void OnStarted()
         {
+            var status = VehicleRegistrationAPI.sdStartup(1);
+            if (status != VehicleRegistrationAPI.S_OK)
+            {
+                VehicleRegistrationReaderException exception = new VehicleRegistrationReaderException()
+                {
+                    Method = "sdStartup",
+                    Status = status,
+                    StatusMessage = VehicleRegistrationAPI.ResponseMessage(status),
+                    DisplayMessage = VehicleRegistrationAPI.ResponseMessage(status)
+                };
+
+                _logger.LogError("Error on Vehicle Registration Card Reader startup", exception);
+
+                throw exception;
+            }
 
         }
 
         private void OnStopped()
         {
+            var status = VehicleRegistrationAPI.sdSleanup();
+            if (status != VehicleRegistrationAPI.S_OK)
+            {
+                VehicleRegistrationReaderException exception = new VehicleRegistrationReaderException()
+                {
+                    Method = "sdCleanup",
+                    Status = status,
+                    StatusMessage = VehicleRegistrationAPI.ResponseMessage(status),
+                    DisplayMessage = VehicleRegistrationAPI.ResponseMessage(status)
+                };
 
+                _logger.LogError("Error on Vehicle Registration Card Reader cleanup", exception);
+
+                throw exception;
+            }
         }
 
     }
