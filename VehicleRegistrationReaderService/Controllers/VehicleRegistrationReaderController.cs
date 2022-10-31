@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VehicleRegistrationReaderService.Models;
 using VehicleRegistrationReaderService.MUP;
 
 namespace VehicleRegistrationReaderService.Controllers
@@ -12,12 +13,27 @@ namespace VehicleRegistrationReaderService.Controllers
     public class VehicleRegistrationReaderController : Controller
     {
         private readonly ILogger<VehicleRegistrationReaderController> _logger;
-        
+        private readonly IVehicleRegistrationReaderWrapper _vehicleRegistrationReaderWrapper;
+
+        public VehicleRegistrationReaderController(
+            ILogger<VehicleRegistrationReaderController> logger,
+            IVehicleRegistrationReaderWrapper vehicleRegistrationReaderWrapper)
+        {
+            _logger = logger;
+            _vehicleRegistrationReaderWrapper = vehicleRegistrationReaderWrapper;
+        }
 
         [Route("test")]
         public async Task<ActionResult<string>> GetTest()
         {
             return Ok("Service is running succesfully");
+        }
+
+        [Route("reader-name")]
+        public async Task<ActionResult<CardReaderList>> GetReaderName()
+        {
+            var readerNames = await _vehicleRegistrationReaderWrapper.GetReaderNames();
+            return Ok(readerNames);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace VehicleRegistrationReaderService.MUP
 {
@@ -26,11 +27,16 @@ namespace VehicleRegistrationReaderService.MUP
         public const UInt32 SCARD_E_CARD_UNSUPPORTED = 0x8010001C;
         public const UInt32 SCARD_E_NO_READERS_AVAILABLE = 0x8010002E;
 
-        public static string TestAttribute { get; set; }
+        public const Int32 MUP_READER_LENGTH_SIZE = 250;
 
-        [DllImport(DLL_com)] public static extern UInt32 sdStartup(Int32 version);
+        [DllImport(DLL_com)]
+        public static extern UInt32 sdStartup(Int32 version);
 
-        [DllImport(DLL_com)] public static extern UInt32 sdSleanup();
+        [DllImport(DLL_com)] 
+        public static extern UInt32 sdSleanup();
+
+        [DllImport(DLL_com, CharSet = CharSet.Ansi)]
+        public static extern UInt32 GetReaderName(UInt32 index, StringBuilder shortName, ref Int32 nameSize);
 
         public static string ResponseMessage(UInt32 status)
         {
