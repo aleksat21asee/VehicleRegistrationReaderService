@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using VehicleRegistrationReaderService.Models;
+using VehicleRegistrationReaderService.Models.Exceptions;
 
 namespace VehicleRegistrationReaderService.MUP
 {
@@ -30,5 +31,45 @@ namespace VehicleRegistrationReaderService.MUP
             return cardReaderList;
 
         }
+
+        private void SetupNewCard(string readerName)
+        {
+            StringBuilder sbReaderName = new StringBuilder(readerName);
+
+            var selectReaderStatus = VehicleRegistrationAPI.SelectReader(sbReaderName);
+            if (selectReaderStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new VehicleRegistrationReaderException
+                {
+                    Method = "Select reader",
+                    Status = selectReaderStatus,
+                    StatusMessage = VehicleRegistrationAPI.ResponseMessage(selectReaderStatus),
+                    DisplayMessage = VehicleRegistrationAPI.ResponseMessage(selectReaderStatus)
+                };
+            }
+
+            var processNewCardStatus = VehicleRegistrationAPI.sdProcessNewCard();
+            if (processNewCardStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new VehicleRegistrationReaderException
+                {
+                    Method = "Process new card",
+                    Status = processNewCardStatus,
+                    StatusMessage = VehicleRegistrationAPI.ResponseMessage(processNewCardStatus),
+                    DisplayMessage = VehicleRegistrationAPI.ResponseMessage(processNewCardStatus)
+                };
+            }
+
+        }
+
+        public async Task<string> GetPersonalData(string readerName)
+        {
+
+            SetupNewCard(readerName);
+
+
+            return "Dosao sam do ovde";
+        }
+
     }
 }

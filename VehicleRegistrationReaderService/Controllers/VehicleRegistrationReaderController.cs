@@ -29,11 +29,18 @@ namespace VehicleRegistrationReaderService.Controllers
             return Ok("Service is running succesfully");
         }
 
-        [Route("reader-name")]
+        [Route("reader-names")]
         public async Task<ActionResult<CardReaderList>> GetReaderName()
         {
             var readerNames = await _vehicleRegistrationReaderWrapper.GetReaderNames();
             return Ok(readerNames);
+        }
+
+        [Route("personal-data")]
+        public async Task<ActionResult<string>> GetPersonalData(string readerName)
+        {
+            var result = await _vehicleRegistrationReaderWrapper.GetPersonalData(readerName);
+            return Ok(result);
         }
     }
 }

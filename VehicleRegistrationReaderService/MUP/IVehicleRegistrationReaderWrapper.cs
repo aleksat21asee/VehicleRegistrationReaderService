@@ -6,5 +6,7 @@ namespace VehicleRegistrationReaderService.MUP
     public interface IVehicleRegistrationReaderWrapper
     {
         Task<CardReaderList> GetReaderNames();
+
+        Task<string> GetPersonalData(string readerName);
     }
 }

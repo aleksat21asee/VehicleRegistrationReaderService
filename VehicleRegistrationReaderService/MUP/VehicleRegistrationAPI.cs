@@ -38,6 +38,12 @@ namespace VehicleRegistrationReaderService.MUP
         [DllImport(DLL_com, CharSet = CharSet.Ansi)]
         public static extern UInt32 GetReaderName(UInt32 index, StringBuilder shortName, ref Int32 nameSize);
 
+        [DllImport(DLL_com, CharSet = CharSet.Ansi)]
+        public static extern UInt32 SelectReader(StringBuilder reader);
+
+        [DllImport(DLL_com, CharSet = CharSet.Ansi)]
+        public static extern UInt32 sdProcessNewCard();
+
         public static string ResponseMessage(UInt32 status)
         {
             return status switch
