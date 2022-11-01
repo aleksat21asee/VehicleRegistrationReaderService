@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using VehicleRegistrationReaderService.Models;
 
 namespace VehicleRegistrationReaderService.MUP
 {
@@ -8,6 +9,19 @@ namespace VehicleRegistrationReaderService.MUP
     {
         public const string DLL_native = @"D:\VehicleRegistrationReaderService\eVehicleRegistrationAPI\eVehicleRegistrationCOM.dll";
         public const string DLL_com = @"D:\VehicleRegistrationReaderService\eVehicleRegistrationAPI\eVehicleRegistrationAPI.dll";
+
+        // max length values
+
+
+        // personal data
+        public const Int32 MaxOwnersPersonalNoSize = 20;
+        public const Int32 MaxOwnersSurnameOrBusinessNameSize = 100;
+        public const Int32 MaxOwnerNameSize = 100;
+        public const Int32 MaxOwnerAddressSize = 200;
+        public const Int32 MaxUsersPersonalNoSize = 20;
+        public const Int32 MaxusersSurnameOrBusinessNameSize = 100;
+        public const Int32 MaxUsersNameSize = 100;
+        public const Int32 MaxUsersAddressSize = 200;
 
         // response codes
         public const UInt32 S_OK = 0;
@@ -43,6 +57,9 @@ namespace VehicleRegistrationReaderService.MUP
 
         [DllImport(DLL_com, CharSet = CharSet.Ansi)]
         public static extern UInt32 sdProcessNewCard();
+
+        [DllImport(DLL_com)]
+        public static extern UInt32 sdReadPersonalData(ref PersonalDataMUP personalDataMUP);
 
         public static string ResponseMessage(UInt32 status)
         {

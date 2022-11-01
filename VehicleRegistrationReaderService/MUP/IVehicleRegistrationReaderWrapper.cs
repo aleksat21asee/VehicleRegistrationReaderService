@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using VehicleRegistrationReaderService.Models;
+using VehicleRegistrationReaderService.Models.ResponseClasses;
 
 namespace VehicleRegistrationReaderService.MUP
 {
@@ -7,6 +8,6 @@ namespace VehicleRegistrationReaderService.MUP
     {
         Task<CardReaderList> GetReaderNames();
 
-        Task<string> GetPersonalData(string readerName);
+        Task<PersonalData> GetPersonalData(string readerName);
     }
 }

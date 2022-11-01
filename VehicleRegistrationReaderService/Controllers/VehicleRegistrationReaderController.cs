@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VehicleRegistrationReaderService.Models;
+using VehicleRegistrationReaderService.Models.ResponseClasses;
 using VehicleRegistrationReaderService.MUP;
 
 namespace VehicleRegistrationReaderService.Controllers
@@ -37,7 +38,7 @@ namespace VehicleRegistrationReaderService.Controllers
         }
 
         [Route("personal-data")]
-        public async Task<ActionResult<string>> GetPersonalData(string readerName)
+        public async Task<ActionResult<PersonalData>> GetPersonalData(string readerName)
         {
             var result = await _vehicleRegistrationReaderWrapper.GetPersonalData(readerName);
             return Ok(result);

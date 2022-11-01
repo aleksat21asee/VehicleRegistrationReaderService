@@ -1,17 +1,20 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using VehicleRegistrationReaderService.Exceptions;
 using VehicleRegistrationReaderService.Exceptions.DomainExceptions;
 using VehicleRegistrationReaderService.Models;
+using VehicleRegistrationReaderService.Models.ResponseClasses;
 
 namespace VehicleRegistrationReaderService.MUP
 {
     class VehicleRegistrationReaderWrapper : IVehicleRegistrationReaderWrapper
     {
-        public VehicleRegistrationReaderWrapper()
+        private readonly IMapper _mapper;
+        public VehicleRegistrationReaderWrapper(IMapper mapper)
         {
-
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<CardReaderList> GetReaderNames()
@@ -52,13 +55,20 @@ namespace VehicleRegistrationReaderService.MUP
 
         }
 
-        public async Task<string> GetPersonalData(string readerName)
+        public async Task<PersonalData> GetPersonalData(string readerName)
         {
-
             SetupNewCard(readerName);
 
+            PersonalDataMUP personalDataMUP = new PersonalDataMUP();
 
-            return "Dosao sam do ovde";
+            var getPersonalDataStatus = VehicleRegistrationAPI.sdReadPersonalData(ref personalDataMUP);
+
+            if (getPersonalDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadPersonalData", new SetupNewCardException());
+            }
+
+            return _mapper.Map<PersonalData>(personalDataMUP);
         }
 
     }

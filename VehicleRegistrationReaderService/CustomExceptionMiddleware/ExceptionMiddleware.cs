@@ -42,9 +42,9 @@ namespace VehicleRegistrationReaderService.CustomExceptionMiddleware
             await httpContext.Response.WriteAsync(JsonSerializer.Serialize(new ErrorDetails()
             {
                 StatusCode = httpContext.Response.StatusCode,
-                Method = exception.Message,
-                StatusMessage = exception.InnerException.Message,
-                DisplayMessage = exception.InnerException.Message
+                Method = exception.InnerException != null ? exception.Message : "unknown",
+                StatusMessage = exception.InnerException?.Message ?? exception.Message,
+                DisplayMessage = exception.InnerException?.Message ?? "Something went wrong"
             }));
         }
     }

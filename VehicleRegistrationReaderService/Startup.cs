@@ -9,6 +9,8 @@ using VehicleRegistrationReaderService.CustomExceptionMiddleware;
 using VehicleRegistrationReaderService.Exceptions;
 using VehicleRegistrationReaderService.Exceptions.DomainExceptions;
 using VehicleRegistrationReaderService.MUP;
+using AutoMapper;
+using System.Reflection;
 
 namespace VehicleRegistrationReaderService
 {
@@ -32,6 +34,8 @@ namespace VehicleRegistrationReaderService
             services.AddHealthChecks();
 
             services.AddSingleton<IVehicleRegistrationReaderWrapper, VehicleRegistrationReaderWrapper>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddTransient<ExceptionMiddleware>();
         }
