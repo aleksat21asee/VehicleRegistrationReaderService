@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
+using VehicleRegistrationReaderService.Exceptions;
+using VehicleRegistrationReaderService.Exceptions.DomainExceptions;
 using VehicleRegistrationReaderService.Models;
-using VehicleRegistrationReaderService.Models.Exceptions;
 
 namespace VehicleRegistrationReaderService.MUP
 {
@@ -39,25 +40,14 @@ namespace VehicleRegistrationReaderService.MUP
             var selectReaderStatus = VehicleRegistrationAPI.SelectReader(sbReaderName);
             if (selectReaderStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new VehicleRegistrationReaderException
-                {
-                    Method = "Select reader",
-                    Status = selectReaderStatus,
-                    StatusMessage = VehicleRegistrationAPI.ResponseMessage(selectReaderStatus),
-                    DisplayMessage = VehicleRegistrationAPI.ResponseMessage(selectReaderStatus)
-                };
+                throw new WrapperException("SelectReader", new ReaderNotFoundException(readerName));
             }
 
             var processNewCardStatus = VehicleRegistrationAPI.sdProcessNewCard();
             if (processNewCardStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new VehicleRegistrationReaderException
-                {
-                    Method = "Process new card",
-                    Status = processNewCardStatus,
-                    StatusMessage = VehicleRegistrationAPI.ResponseMessage(processNewCardStatus),
-                    DisplayMessage = VehicleRegistrationAPI.ResponseMessage(processNewCardStatus)
-                };
+                throw new WrapperException("sdProcessNewCard", new SetupNewCardException());
+
             }
 
         }
