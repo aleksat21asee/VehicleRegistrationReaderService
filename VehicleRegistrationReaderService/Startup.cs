@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using VehicleRegistrationReaderService.CustomExceptionMiddleware;
 using VehicleRegistrationReaderService.Exceptions;
-using VehicleRegistrationReaderService.Exceptions.DomainExceptions;
 using VehicleRegistrationReaderService.MUP;
 using AutoMapper;
 using System.Reflection;
@@ -73,7 +72,7 @@ namespace VehicleRegistrationReaderService
             var status = VehicleRegistrationAPI.sdStartup(1);
             if (status != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdStartup", new StartupException(VehicleRegistrationAPI.ResponseMessage(status)));
+                throw new WrapperException("sdStartup", new ServiceException(VehicleRegistrationAPI.ResponseMessage(status)));
             }
         }
 
@@ -82,7 +81,7 @@ namespace VehicleRegistrationReaderService
             var status = VehicleRegistrationAPI.sdSleanup();
             if (status != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdCleanup", new CleanupException(VehicleRegistrationAPI.ResponseMessage(status)));
+                throw new WrapperException("sdCleanup", new ServiceException(VehicleRegistrationAPI.ResponseMessage(status)));
             }
         }
 

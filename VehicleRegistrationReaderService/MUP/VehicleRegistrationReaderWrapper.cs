@@ -3,7 +3,6 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using VehicleRegistrationReaderService.Exceptions;
-using VehicleRegistrationReaderService.Exceptions.DomainExceptions;
 using VehicleRegistrationReaderService.Models;
 using VehicleRegistrationReaderService.Models.MarshallStructs;
 using VehicleRegistrationReaderService.Models.ResponseClasses;
@@ -44,13 +43,13 @@ namespace VehicleRegistrationReaderService.MUP
             var selectReaderStatus = VehicleRegistrationAPI.SelectReader(sbReaderName);
             if (selectReaderStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("SelectReader", new ReaderNotFoundException(readerName));
+                throw new WrapperException("SelectReader", new NotFoundException(VehicleRegistrationAPI.ResponseMessage(selectReaderStatus)));
             }
 
             var processNewCardStatus = VehicleRegistrationAPI.sdProcessNewCard();
             if (processNewCardStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdProcessNewCard", new SetupNewCardException());
+                throw new WrapperException("sdProcessNewCard", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(processNewCardStatus)));
 
             }
 
@@ -66,7 +65,7 @@ namespace VehicleRegistrationReaderService.MUP
 
             if (getPersonalDataStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdReadPersonalData", new SetupNewCardException());
+                throw new WrapperException("sdReadPersonalData", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getPersonalDataStatus)));
             }
 
             return _mapper.Map<PersonalDataResponse>(personalDataMUP);
@@ -82,7 +81,7 @@ namespace VehicleRegistrationReaderService.MUP
 
             if (getRegistrationDataStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdReadRegistration", new SetupNewCardException());
+                throw new WrapperException("sdReadRegistration", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getRegistrationDataStatus)));
             }
 
             return _mapper.Map<RegistrationDataResponse>(registrationDataMUP);
@@ -98,7 +97,7 @@ namespace VehicleRegistrationReaderService.MUP
 
             if (getDocumentDataStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdReadDocumentData", new SetupNewCardException());
+                throw new WrapperException("sdReadDocumentData", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getDocumentDataStatus)));
             }
 
             return _mapper.Map<DocumentDataResponse>(documentDataMUP);
@@ -114,7 +113,7 @@ namespace VehicleRegistrationReaderService.MUP
 
             if (getVehicleDataStatus != VehicleRegistrationAPI.S_OK)
             {
-                throw new WrapperException("sdReadVehicleData", new SetupNewCardException());
+                throw new WrapperException("sdReadVehicleData", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getVehicleDataStatus)));
             }
 
             return _mapper.Map<VehicleDataResponse>(vehicleDataMUP);

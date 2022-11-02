@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace VehicleRegistrationReaderService.Exceptions
 {
-    public class BadRequestException : Exception
+    public class ServiceException : Exception
     {
-        public BadRequestException(string message)
+        public ServiceException(string message)
             : base(message)
         {
         }

@@ -36,6 +36,7 @@ namespace VehicleRegistrationReaderService.CustomExceptionMiddleware
             {
                 BadRequestException => StatusCodes.Status400BadRequest,
                 NotFoundException => StatusCodes.Status404NotFound,
+                ServiceException => StatusCodes.Status500InternalServerError,
                 _ => StatusCodes.Status500InternalServerError
             };
 
@@ -43,7 +44,6 @@ namespace VehicleRegistrationReaderService.CustomExceptionMiddleware
             {
                 StatusCode = httpContext.Response.StatusCode,
                 Method = exception.InnerException != null ? exception.Message : "unknown",
-                StatusMessage = exception.InnerException?.Message ?? exception.Message,
                 DisplayMessage = exception.InnerException?.Message ?? "Something went wrong"
             }));
         }

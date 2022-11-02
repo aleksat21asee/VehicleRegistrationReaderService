@@ -8,8 +8,7 @@ namespace VehicleRegistrationReaderService.MUP
 {
     public class VehicleRegistrationAPI
     {
-        public const string DLL_native = @"D:\VehicleRegistrationReaderService\eVehicleRegistrationAPI\eVehicleRegistrationCOM.dll";
-        public const string DLL_com = @"D:\VehicleRegistrationReaderService\eVehicleRegistrationAPI\eVehicleRegistrationAPI.dll";
+        public const string DLL = "eVehicleRegistrationAPI.dll";
 
         // max length values
 
@@ -82,31 +81,31 @@ namespace VehicleRegistrationReaderService.MUP
 
         public const Int32 MUP_READER_LENGTH_SIZE = 250;
 
-        [DllImport(DLL_com)]
+        [DllImport(DLL)]
         public static extern UInt32 sdStartup(Int32 version);
 
-        [DllImport(DLL_com)] 
+        [DllImport(DLL)] 
         public static extern UInt32 sdSleanup();
 
-        [DllImport(DLL_com, CharSet = CharSet.Ansi)]
+        [DllImport(DLL, CharSet = CharSet.Ansi)]
         public static extern UInt32 GetReaderName(UInt32 index, StringBuilder shortName, ref Int32 nameSize);
 
-        [DllImport(DLL_com, CharSet = CharSet.Ansi)]
+        [DllImport(DLL, CharSet = CharSet.Ansi)]
         public static extern UInt32 SelectReader(StringBuilder reader);
 
-        [DllImport(DLL_com, CharSet = CharSet.Ansi)]
+        [DllImport(DLL, CharSet = CharSet.Ansi)]
         public static extern UInt32 sdProcessNewCard();
 
-        [DllImport(DLL_com)]
+        [DllImport(DLL)]
         public static extern UInt32 sdReadPersonalData(ref PersonalDataMUP personalDataMUP);
 
-        [DllImport(DLL_com)]
+        [DllImport(DLL)]
         public static extern UInt32 sdReadRegistration(ref RegistrationDataMUP registrationDataMUP, UInt32 index);
 
-        [DllImport(DLL_com)]
+        [DllImport(DLL)]
         public static extern UInt32 sdReadDocumentData(ref DocumentDataMUP documentDataMUP);
 
-        [DllImport(DLL_com)]
+        [DllImport(DLL)]
         public static extern UInt32 sdReadVehicleData(ref VehicleDataMUP vehicleDataMUP);
 
         public static string ResponseMessage(UInt32 status)

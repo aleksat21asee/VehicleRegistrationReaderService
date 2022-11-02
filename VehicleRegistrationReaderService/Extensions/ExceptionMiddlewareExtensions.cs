@@ -35,7 +35,6 @@ namespace VehicleRegistrationReaderService.Extensions
                         {
                             StatusCode = context.Response.StatusCode,
                             Method = "unknown",
-                            StatusMessage = "Something went wrong",
                             DisplayMessage = "Something went wrong"
                         }.ToString());
                     }

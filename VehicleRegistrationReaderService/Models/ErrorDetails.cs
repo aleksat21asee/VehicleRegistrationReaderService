@@ -12,8 +12,6 @@ namespace VehicleRegistrationReaderService.Models
 
         public string Method { get; set; }
 
-        public string StatusMessage { get; set; }
-
         public string DisplayMessage { get; set; }
 
         public override string ToString()
