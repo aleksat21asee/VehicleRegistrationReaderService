@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VehicleRegistrationReaderService.Models.ResponseClasses
 {
-    public class PersonalData
+    public class PersonalDataResponse
     {
         public string OwnersPersonalNo { get; set; }
 

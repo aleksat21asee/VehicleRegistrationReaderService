@@ -24,12 +24,6 @@ namespace VehicleRegistrationReaderService.Controllers
             _vehicleRegistrationReaderWrapper = vehicleRegistrationReaderWrapper;
         }
 
-        [Route("test")]
-        public async Task<ActionResult<string>> GetTest()
-        {
-            return Ok("Service is running succesfully");
-        }
-
         [Route("reader-names")]
         public async Task<ActionResult<CardReaderList>> GetReaderName()
         {
@@ -38,7 +32,7 @@ namespace VehicleRegistrationReaderService.Controllers
         }
 
         [Route("personal-data")]
-        public async Task<ActionResult<PersonalData>> GetPersonalData(string readerName)
+        public async Task<ActionResult<PersonalDataResponse>> GetPersonalData(string readerName)
         {
             var result = await _vehicleRegistrationReaderWrapper.GetPersonalData(readerName);
             return Ok(result);
@@ -55,6 +49,13 @@ namespace VehicleRegistrationReaderService.Controllers
         public async Task<ActionResult<DocumentDataResponse>> GetDocumentData(string readerName)
         {
             var result = await _vehicleRegistrationReaderWrapper.GetDocumentData(readerName);
+            return Ok(result);
+        }
+
+        [Route("vehicle-data")]
+        public async Task<ActionResult<VehicleDataResponse>> GetVehicleData(string readerName)
+        {
+            var result = await _vehicleRegistrationReaderWrapper.GetVehicleData(readerName);
             return Ok(result);
         }
     }

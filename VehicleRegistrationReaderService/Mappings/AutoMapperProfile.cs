@@ -13,9 +13,10 @@ namespace VehicleRegistrationReaderService.Mappings
     {
         public AutoMapperProfile()
         {
-            CreateMap<PersonalDataMUP, PersonalData>();
+            CreateMap<PersonalDataMUP, PersonalDataResponse>();
             CreateMap<RegistrationDataMUP, RegistrationDataResponse>();
             CreateMap<DocumentDataMUP, DocumentDataResponse>();
+            CreateMap<VehicleDataMUP, VehicleDataResponse>();
         }
     }
 }

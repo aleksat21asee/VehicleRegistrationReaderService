@@ -38,6 +38,30 @@ namespace VehicleRegistrationReaderService.MUP
         public const Int32 MaxExpiryDateSize = 16;
         public const Int32 MaxSerialNumberSize = 20;
 
+        // vehicle data
+        public const Int32 MaxDateOfFirstRegistrationSize = 16;
+        public const Int32 MaxYearOfProductionSize = 16;
+        public const Int32 MaxVehicleMakeSize = 100;
+        public const Int32 MaxVehicleTypeSize = 100;
+        public const Int32 MaxCommercialDescriptionSize = 100;
+        public const Int32 MaxVehicleIDNumberSize = 100;
+        public const Int32 MaxRegistrationNumberOfVehicleSize = 20;
+        public const Int32 MaxMaximumNetPowerSize = 20;
+        public const Int32 MaxEngineCapacitySize = 20;
+        public const Int32 MaxTypeOfFuelSize = 100;
+        public const Int32 MaxPowerWeightRatioSize = 20;
+        public const Int32 MaxVehicleMassSize = 20;
+        public const Int32 MaxMaximumPermissibleLadenMassSize = 20;
+        public const Int32 MaxTypeApprovalNumberSize = 50;
+        public const Int32 MaxNumberOfSeatsSize = 20;
+        public const Int32 MaxNumberOfStandingPlacesSize = 20;
+        public const Int32 MaxEngineIDNumberSize = 100;
+        public const Int32 MaxNumberOfAxlesSize = 20;
+        public const Int32 MaxVehicleCategorySize = 50;
+        public const Int32 MaxColourOfVehicleSize = 50;
+        public const Int32 MaxRestrictionToChangeOwnerSize = 200;
+        public const Int32 MaxVehicleLoadSize = 20;
+
         // response codes
         public const UInt32 S_OK = 0;
 
@@ -81,6 +105,9 @@ namespace VehicleRegistrationReaderService.MUP
 
         [DllImport(DLL_com)]
         public static extern UInt32 sdReadDocumentData(ref DocumentDataMUP documentDataMUP);
+
+        [DllImport(DLL_com)]
+        public static extern UInt32 sdReadVehicleData(ref VehicleDataMUP vehicleDataMUP);
 
         public static string ResponseMessage(UInt32 status)
         {
