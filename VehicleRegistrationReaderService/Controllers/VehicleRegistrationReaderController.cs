@@ -50,5 +50,12 @@ namespace VehicleRegistrationReaderService.Controllers
             var result = await _vehicleRegistrationReaderWrapper.GetRegistrationData(readerName);
             return Ok(result);
         }
+
+        [Route("document-data")]
+        public async Task<ActionResult<DocumentDataResponse>> GetDocumentData(string readerName)
+        {
+            var result = await _vehicleRegistrationReaderWrapper.GetDocumentData(readerName);
+            return Ok(result);
+        }
     }
 }

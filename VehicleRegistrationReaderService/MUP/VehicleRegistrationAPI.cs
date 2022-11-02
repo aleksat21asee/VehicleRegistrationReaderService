@@ -29,6 +29,15 @@ namespace VehicleRegistrationReaderService.MUP
         public const Int32 MaxSignatureDataSize = 1024;
         public const Int32 MaxIssuingAuthoritySize = 4096;
 
+        // document data
+        public const Int32 MaxStateIssuingSize = 50;
+        public const Int32 MaxCompetentAuthoritySize = 50;
+        public const Int32 MaxAuthorityIssuingSize = 50;
+        public const Int32 MaxUnambiguousNumberSize = 30;
+        public const Int32 MaxIssuingDateSize = 16;
+        public const Int32 MaxExpiryDateSize = 16;
+        public const Int32 MaxSerialNumberSize = 20;
+
         // response codes
         public const UInt32 S_OK = 0;
 
@@ -69,6 +78,9 @@ namespace VehicleRegistrationReaderService.MUP
 
         [DllImport(DLL_com)]
         public static extern UInt32 sdReadRegistration(ref RegistrationDataMUP registrationDataMUP, UInt32 index);
+
+        [DllImport(DLL_com)]
+        public static extern UInt32 sdReadDocumentData(ref DocumentDataMUP documentDataMUP);
 
         public static string ResponseMessage(UInt32 status)
         {

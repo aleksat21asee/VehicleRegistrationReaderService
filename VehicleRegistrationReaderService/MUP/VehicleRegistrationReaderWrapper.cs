@@ -87,5 +87,21 @@ namespace VehicleRegistrationReaderService.MUP
 
             return _mapper.Map<RegistrationDataResponse>(registrationDataMUP);
         }
+
+        public async Task<DocumentDataResponse> GetDocumentData(string readerName)
+        {
+            SetupNewCard(readerName);
+
+            DocumentDataMUP documentDataMUP = new DocumentDataMUP();
+
+            var getDocumentDataStatus = VehicleRegistrationAPI.sdReadDocumentData(ref documentDataMUP);
+
+            if (getDocumentDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadDocumentData", new SetupNewCardException());
+            }
+
+            return _mapper.Map<DocumentDataResponse>(documentDataMUP);
+        }
     }
 }

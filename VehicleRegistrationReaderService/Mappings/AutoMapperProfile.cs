@@ -15,6 +15,7 @@ namespace VehicleRegistrationReaderService.Mappings
         {
             CreateMap<PersonalDataMUP, PersonalData>();
             CreateMap<RegistrationDataMUP, RegistrationDataResponse>();
+            CreateMap<DocumentDataMUP, DocumentDataResponse>();
         }
     }
 }
