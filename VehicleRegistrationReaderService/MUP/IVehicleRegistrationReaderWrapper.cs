@@ -9,5 +9,7 @@ namespace VehicleRegistrationReaderService.MUP
         Task<CardReaderList> GetReaderNames();
 
         Task<PersonalData> GetPersonalData(string readerName);
+
+        Task<RegistrationDataResponse> GetRegistrationData(string readerName);
     }
 }

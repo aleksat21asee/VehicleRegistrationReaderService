@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using VehicleRegistrationReaderService.Exceptions;
 using VehicleRegistrationReaderService.Exceptions.DomainExceptions;
 using VehicleRegistrationReaderService.Models;
+using VehicleRegistrationReaderService.Models.MarshallStructs;
 using VehicleRegistrationReaderService.Models.ResponseClasses;
 
 namespace VehicleRegistrationReaderService.MUP
@@ -71,5 +72,20 @@ namespace VehicleRegistrationReaderService.MUP
             return _mapper.Map<PersonalData>(personalDataMUP);
         }
 
+        public async Task<RegistrationDataResponse> GetRegistrationData(string readerName)
+        {
+            SetupNewCard(readerName);
+
+            RegistrationDataMUP registrationDataMUP = new RegistrationDataMUP();
+
+            var getRegistrationDataStatus = VehicleRegistrationAPI.sdReadRegistration(ref registrationDataMUP, 1);
+
+            if (getRegistrationDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadRegistration", new SetupNewCardException());
+            }
+
+            return _mapper.Map<RegistrationDataResponse>(registrationDataMUP);
+        }
     }
 }

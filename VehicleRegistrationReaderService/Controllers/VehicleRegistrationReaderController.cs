@@ -43,5 +43,12 @@ namespace VehicleRegistrationReaderService.Controllers
             var result = await _vehicleRegistrationReaderWrapper.GetPersonalData(readerName);
             return Ok(result);
         }
+
+        [Route("registration-data")]
+        public async Task<ActionResult<RegistrationDataResponse>> GetRegistrationData(string readerName)
+        {
+            var result = await _vehicleRegistrationReaderWrapper.GetRegistrationData(readerName);
+            return Ok(result);
+        }
     }
 }

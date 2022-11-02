@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using VehicleRegistrationReaderService.Models;
+using VehicleRegistrationReaderService.Models.MarshallStructs;
 
 namespace VehicleRegistrationReaderService.MUP
 {
@@ -22,6 +23,11 @@ namespace VehicleRegistrationReaderService.MUP
         public const Int32 MaxusersSurnameOrBusinessNameSize = 100;
         public const Int32 MaxUsersNameSize = 100;
         public const Int32 MaxUsersAddressSize = 200;
+
+        // registration data
+        public const Int32 MaxRegistrationDataSize = 4096;
+        public const Int32 MaxSignatureDataSize = 1024;
+        public const Int32 MaxIssuingAuthoritySize = 4096;
 
         // response codes
         public const UInt32 S_OK = 0;
@@ -60,6 +66,9 @@ namespace VehicleRegistrationReaderService.MUP
 
         [DllImport(DLL_com)]
         public static extern UInt32 sdReadPersonalData(ref PersonalDataMUP personalDataMUP);
+
+        [DllImport(DLL_com)]
+        public static extern UInt32 sdReadRegistration(ref RegistrationDataMUP registrationDataMUP, UInt32 index);
 
         public static string ResponseMessage(UInt32 status)
         {
