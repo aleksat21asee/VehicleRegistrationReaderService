@@ -26,7 +26,7 @@ namespace VehicleRegistrationReaderService.Models.MarshallStructs
         public string VehicleType;
         public Int32 VehicleTypeSize;
 
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = VehicleRegistrationAPI.MaxVehicleTypeSize)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = VehicleRegistrationAPI.MaxCommercialDescriptionSize)]
         public string CommercialDescription;
         public Int32 CommercialDescriptionSize;
 

@@ -8,6 +8,7 @@ namespace VehicleRegistrationReaderService.MUP
 {
     public class VehicleRegistrationAPI
     {
+        //public const string DLL = @"D:\VehicleRegistrationReaderService\eVehicleRegistrationAPI\eVehicleRegistrationAPI.dll";
         public const string DLL = "eVehicleRegistrationAPI.dll";
 
         // max length values
@@ -39,7 +40,7 @@ namespace VehicleRegistrationReaderService.MUP
 
         // vehicle data
         public const Int32 MaxDateOfFirstRegistrationSize = 16;
-        public const Int32 MaxYearOfProductionSize = 16;
+        public const Int32 MaxYearOfProductionSize = 5;
         public const Int32 MaxVehicleMakeSize = 100;
         public const Int32 MaxVehicleTypeSize = 100;
         public const Int32 MaxCommercialDescriptionSize = 100;
