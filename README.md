@@ -28,73 +28,9 @@ e.g.
 2. Run file ``uninstall.exe`` as **administartor**.
 
 ## How to use
-There are currently 4 available endpoints:
-
-1. #### GetReaderNames 
-http://localhost:61408/v1/vehicle-registration-card-reader/reader-names
+Full API specification can be found in api-spec folder. To see the list of available methods and data models, you will need to open .yaml file in editor like swagger. 
 ```
-{
-    "cardReaders": [
-        {
-            readerName: string
-        }
-    ]
-}
-```
-2. #### GetPersonalData 
-http://localhost:61408/v1/vehicle-registration-card-reader/personal-data?$readerName
-```
-{
-    ownersPersonalNo: string,
-    ownersSurnameOrBusinessName: string,
-    ownerName: string,
-    ownerAddress: string,
-    usersPersonalNo: string,
-    usersSurnameOrBusinessName: string,
-    usersName: string,
-    usersAddress: string
-}
-```
-3. #### GetDocumentData
-http://localhost:61408/v1/vehicle-registration-card-reader/document-data?$readerName
-```
-{
-    stateIssuing: string,
-    competentAuthority: string,
-    authorityIssuing: strign,
-    unambiguousNumber: string,
-    issuingDate: string,
-    expiryDate: string,
-    serialNumber: string
-}
-```
-4. #### GetVehicleData 
-http://localhost:61408/v1/vehicle-registration-card-reader/vehicle-data?$readerName
-```
-{
-    dateOfFirstRegistration: string,
-    yearOfProduction: string,
-    vehicleMake: string,
-    vehicleType: string,
-    commercialDescription: string,
-    vehicleIDNumber: string,
-    registrationNumberOfVehicle: string,
-    maximumNetPower: string,
-    engineCapacity: string,
-    typeOfFuel: string,
-    powerWeightRatio: string,
-    vehicleMass: string,
-    maximumPermissibleLadenMass: string,
-    typeApprovalNumber: string,
-    numberOfSeats: string,
-    numberOfStandingPlaces: string,
-    engineIDNumber: string,
-    numberOfAxles: string,
-    vehicleCategory: string,
-    colourOfVehicle: string,
-    restrictionToChangeOwner: string,
-    vehicleLoad: string
-}
+https://editor.swagger.io/
 ```
 ### Note
 Detailed description of property attributes can be found in ``eVehicleRegistrationAPI/eVehicle Registration SDK Korisnicko Uputstvo.pdf``
