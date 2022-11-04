@@ -1,0 +1,560 @@
+{
+  "openapi": "3.0.3",
+  "x-asee-visibility": "internal",
+  "x-asee-summary": "Working with processes and tasks",
+  "x-asee-icon": "&#xE853",
+  "info": {
+    "version": "v1",
+    "title": "Vehicle Registration Reader API",
+    "description": "Vehicle Registration Reader Service is a wrapper around eVehicleRegistrationAPI provided by Republic of Serbia, Ministry of Interior.\n",
+    "contact": {
+      "name": "Aleksa Toroman",
+      "email": "aleksa.toroman@asseco-see.rs"
+    }
+  },
+  "servers": [
+    {
+      "description": "Windows service",
+      "url": "http://localhost:61408/v1/vehicle-registration-card-reader/",
+      "variables": {
+        "port": {
+          "enum": [
+            "61408"
+          ],
+          "default": "61408"
+        }
+      }
+    },
+    {
+      "description": "IIS",
+      "url": "http://localhost:23784/v1/vehicle-registration-card-reader/",
+      "variables": {
+        "port": {
+          "enum": [
+            "23784"
+          ],
+          "default": "23784"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Personal data",
+      "description": "Working with personal data"
+    },
+    {
+      "name": "Vehicle data",
+      "description": "Working with vehicle data"
+    },
+    {
+      "name": "Document data",
+      "description": "Working with document data"
+    },
+    {
+      "name": "Card readers",
+      "description": "Working with card readers"
+    }
+  ],
+  "paths": {
+    "/personal-data": {
+      "get": {
+        "description": "Returns personal data information",
+        "tags": [
+          "Personal data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/reader-name-param"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personal-data-response"
+                },
+                "examples": {
+                  "personal-data-success": {
+                    "$ref": "#/components/examples/personal-data-success"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document-data": {
+      "get": {
+        "description": "Returns document data information",
+        "tags": [
+          "Document data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/reader-name-param"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personal-data-response"
+                },
+                "examples": {
+                  "document-data-success": {
+                    "$ref": "#/components/examples/document-data-success"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vehicle-data": {
+      "get": {
+        "description": "Returns document data information",
+        "tags": [
+          "Vehicle data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/reader-name-param"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personal-data-response"
+                },
+                "examples": {
+                  "document-data-success": {
+                    "$ref": "#/components/examples/vehicle-data-success"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reader-names": {
+      "get": {
+        "description": "Returns list of card reader names",
+        "tags": [
+          "Card readers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/card-readers-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error-details-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "examples": {
+      "personal-data-success": {
+        "summary": "Personal data request was successful",
+        "value": {
+          "OwnersPersonalNo": "0101009780011",
+          "OwnersSurnameOrBusinessName": "Peric",
+          "OwnerName": "Pera",
+          "OwnerAddress": "Beogradska 1",
+          "UsersPersonalNo": "",
+          "UsersSurnameOrBusinessName": "",
+          "UsersName": "",
+          "UsersAddress": ""
+        }
+      },
+      "document-data-success": {
+        "summary": "Document data requst was successful",
+        "value": {
+          "StateIssuing": "REPUBLIKA SRBIJA",
+          "CompetentAuthority": "MINISTARSTVO UNUTRASNJIH POSLOVA REPUBLIKE SRBIJE",
+          "AuthorityIssuing": "PS NOVI BEOGRAD",
+          "UnambiguousNumber": "1234567",
+          "IssuingDate": "01.01.2021.",
+          "ExpiryDate": "31.12.9999",
+          "SerialNumber": "SD0000000001"
+        }
+      },
+      "vehicle-data-success": {
+        "summary": "Vehicle data request was successful",
+        "value": {
+          "DateOfFirstRegistration": "01.01.1999",
+          "YearOfProduction": "2021",
+          "VehicleMake": "Mercedes",
+          "VehicleType": "-",
+          "CommercialDescription": "AMG",
+          "VehicleIDNumber": "42142142114",
+          "RegistrationNumberOfVehicle": "BG0001-AA",
+          "MaximumNetPower": "200",
+          "EngineCapacity": "2200",
+          "TypeOfFuel": "DIZEL",
+          "PowerWeightRatio": "0",
+          "VehicleMass": "1500",
+          "MaximumPermissibleLadenMass": "1800",
+          "TypeApprovalNumber": "-",
+          "NumberOfSeats": "2",
+          "NumberOfStandingPlaces": "0",
+          "EngineIDNumber": "XT1124124",
+          "NumberOfAxles": "2",
+          "VehicleCategory": "PUTNICKO VOZILO",
+          "ColourOfVehicle": "E SIVA B",
+          "RestrictionToChangeOwner": "01012021",
+          "VehicleLoad": "0"
+        }
+      }
+    },
+    "parameters": {
+      "reader-name-param": {
+        "name": "readerName",
+        "in": "query",
+        "description": "Name of the smart card reader where smart card is inserted",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "error-details-response": {
+        "type": "object",
+        "properties": {
+          "StatusCode": {
+            "type": "integer",
+            "format": "int32",
+            "description": "HTTP Status Code"
+          },
+          "Method": {
+            "type": "string",
+            "description": "Name of the method on which the error occured"
+          },
+          "DisplayMessage": {
+            "type": "string",
+            "description": "Error to display to the user"
+          }
+        }
+      },
+      "card-readers-response": {
+        "type": "object",
+        "properties": {
+          "CardReaders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/card-reader"
+            }
+          }
+        }
+      },
+      "card-reader": {
+        "type": "object",
+        "properties": {
+          "ReaderName": {
+            "type": "string"
+          }
+        }
+      },
+      "personal-data-response": {
+        "type": "object",
+        "properties": {
+          "OwnersPersonalNo": {
+            "type": "string",
+            "description": "JMBG, odnosno matični broj vlasnika vozila"
+          },
+          "OwnersSurnameOrBusinessName": {
+            "type": "string",
+            "description": "Prezime vlasnika (firma odnosno naziv za pravna lica)"
+          },
+          "OwnerName": {
+            "type": "string",
+            "description": "Ime vlasnika"
+          },
+          "OwnerAddress": {
+            "type": "string",
+            "description": "Prebivalište (sedište) i adresa vlasnika vozila"
+          },
+          "UsersPersonalNo": {
+            "type": "string",
+            "description": "JMBG, odnosno matični broj korisnika vozila"
+          },
+          "UsersSurnameOrBusinessName": {
+            "type": "string",
+            "description": "Prezime korisnika vozila (firma odnosno naziv za pravna lica)"
+          },
+          "UsersName": {
+            "type": "string",
+            "description": "Ime korisnika vozila"
+          },
+          "UsersAddress": {
+            "type": "string",
+            "description": "Prebivalište (sedište) i adresa korisnika vozila"
+          }
+        }
+      },
+      "document-data-response": {
+        "type": "object",
+        "properties": {
+          "StateIssuing": {
+            "type": "string",
+            "description": "Država izdavanja"
+          },
+          "CompetentAuthority": {
+            "type": "string",
+            "description": "Ovleščeni organ"
+          },
+          "AuthorityIssuing": {
+            "type": "string",
+            "description": "Organ izdavanja saobraćajne dozvole"
+          },
+          "UnambiguousNumber": {
+            "type": "string",
+            "description": "Jedinstveni broj pod kojim je vozilo uposano u registar"
+          },
+          "IssuingDate": {
+            "type": "string",
+            "description": "Datum izdavanja saobračajne dozvole"
+          },
+          "ExpiryDate": {
+            "type": "string",
+            "description": "Važenje registracije"
+          },
+          "SerialNumber": {
+            "type": "string",
+            "description": "Serijski broj saobraćajne dozvole"
+          }
+        }
+      },
+      "vehicle-data-response": {
+        "type": "object",
+        "properties": {
+          "DateOfFirstRegistration": {
+            "type": "string",
+            "description": "Datum prve registracije"
+          },
+          "YearOfProduction": {
+            "type": "string",
+            "description": "Godine proizvodnje"
+          },
+          "VehicleMake": {
+            "type": "string",
+            "description": "Marka"
+          },
+          "VehicleType": {
+            "type": "string",
+            "description": "Tip"
+          },
+          "CommercialDescription": {
+            "type": "string",
+            "description": "Komercijalna oznaka (model)"
+          },
+          "VehicleIDNumber": {
+            "type": "string",
+            "description": "Broj šasije"
+          },
+          "RegistrationNumberOfVehicle": {
+            "type": "string",
+            "description": "Registarski broj vozila"
+          },
+          "MaximumNetPower": {
+            "type": "string",
+            "description": "Snaga motora u kW"
+          },
+          "EngineCapacity": {
+            "type": "string",
+            "description": "Radna zapremina motora"
+          },
+          "TypeOfFuel": {
+            "type": "string",
+            "description": "Vrsta goriva ili pogona"
+          },
+          "PowerWeightRatio": {
+            "type": "string",
+            "description": "Odnos snaga/masa u kg/kW (samo za motocikle)"
+          },
+          "VehicleMass": {
+            "type": "string",
+            "description": "Masa"
+          },
+          "MaximumPermissibleLadenMass": {
+            "type": "string",
+            "description": "Najveća dozvoljena masa"
+          },
+          "TypeApprovalNumber": {
+            "type": "string",
+            "description": "Homologacijska oznaka"
+          },
+          "NumberOfSeats": {
+            "type": "string",
+            "description": "Broj mesta za sedenje uključujući i mesto vozača"
+          },
+          "NumberOfStandingPlaces": {
+            "type": "string",
+            "description": "Broj mesta za stajanje"
+          },
+          "EngineIDNumber": {
+            "type": "string",
+            "description": "Broj motora"
+          },
+          "NumberOfAxles": {
+            "type": "string",
+            "description": "Broj osovina"
+          },
+          "VehicleCategory": {
+            "type": "string",
+            "description": "Vrsta vozila"
+          },
+          "ColourOfVehicle": {
+            "type": "string",
+            "description": "Boja vozila"
+          },
+          "RestrictionToChangeOwner": {
+            "type": "string",
+            "description": "Zabrana otuđenja vozila do"
+          },
+          "VehicleLoad": {
+            "type": "string",
+            "description": "Nosivost vozila"
+          }
+        }
+      }
+    }
+  }
+}
