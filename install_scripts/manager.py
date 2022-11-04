@@ -24,20 +24,24 @@ class CommandExecutor:
             
 
 class ServiceManager: 
-    def __init__(self, service_name: str) -> None:
+    def __init__(self, service_name: str, port_number: int = 61408) -> None:
          self.root_path = os.getcwd()
          self.service_name = service_name
+         self.port_number = port_number
 
     # install & run service
     def create_service(self):
         # Check if service is installed
         if self._service_exists():
-            self._terminate(f'Service {self.service_name} is already installed!')
+            print(f'Service {self.service_name} is already installed!')
+            print(f'Removing previous version of {self.service_name}...')
+
+            self.uninstall_service(False)
 
         executor = CommandExecutor()
 
         # install service
-        cmd = f'New-Service {self.service_name} -BinaryPathName "{self.root_path}\\{self.service_name}.exe"'
+        cmd = f'New-Service {self.service_name} -BinaryPathName "{self.root_path}\\{self.service_name}.exe --port-number {self.port_number}"'
         action_status, completed_process = executor.execute_command(cmd, f'Creating service {self.service_name} ...')
         self._check_terminate(action_status, completed_process)
 
@@ -50,7 +54,7 @@ class ServiceManager:
 
 
     # uninstall service
-    def uninstall_service(self):
+    def uninstall_service(self, stop=True):
         # Check if service is not installed
         if not self._service_exists():
             self._terminate(f'{self.service_name} is not installed!')
@@ -65,11 +69,11 @@ class ServiceManager:
         action_status, completed_process = executor.execute_command(cmd, f'Uninstalling service {self.service_name} ...')
         self._check_terminate(action_status, completed_process)
 
-
-        self._terminate(f'Service {self.service_name} has been uninstalled! You may need to restart your computer for this action to take effect.')
-
+        if stop:
+            self._terminate(f'Service {self.service_name} has been uninstalled! You may need to restart your computer for this action to take effect.')
+        else:
+            print(f'Service {self.service_name} has been uninstalled!')
         
-
     def _check_terminate(self, action_status: ActionStatus, completed_process: CompletedProcess):
         if action_status == ActionStatus.ERROR_ABORT:
             self._terminate(f'{completed_process.stderr}')
