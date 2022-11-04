@@ -71,22 +71,6 @@ namespace VehicleRegistrationReaderService.MUP
             return _mapper.Map<PersonalDataResponse>(personalDataMUP);
         }
 
-        public async Task<RegistrationDataResponse> GetRegistrationData(string readerName)
-        {
-            SetupNewCard(readerName);
-
-            RegistrationDataMUP registrationDataMUP = new RegistrationDataMUP();
-
-            var getRegistrationDataStatus = VehicleRegistrationAPI.sdReadRegistration(ref registrationDataMUP, 1);
-
-            if (getRegistrationDataStatus != VehicleRegistrationAPI.S_OK)
-            {
-                throw new WrapperException("sdReadRegistration", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getRegistrationDataStatus)));
-            }
-
-            return _mapper.Map<RegistrationDataResponse>(registrationDataMUP);
-        }
-
         public async Task<DocumentDataResponse> GetDocumentData(string readerName)
         {
             SetupNewCard(readerName);
@@ -117,6 +101,23 @@ namespace VehicleRegistrationReaderService.MUP
             }
 
             return _mapper.Map<VehicleDataResponse>(vehicleDataMUP);
+        }
+
+        // NOT USED
+        private RegistrationDataResponse GetRegistrationData(string readerName)
+        {
+            SetupNewCard(readerName);
+
+            RegistrationDataMUP registrationDataMUP = new RegistrationDataMUP();
+
+            var getRegistrationDataStatus = VehicleRegistrationAPI.sdReadRegistration(ref registrationDataMUP, 1);
+
+            if (getRegistrationDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadRegistration", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getRegistrationDataStatus)));
+            }
+
+            return _mapper.Map<RegistrationDataResponse>(registrationDataMUP);
         }
     }
 }

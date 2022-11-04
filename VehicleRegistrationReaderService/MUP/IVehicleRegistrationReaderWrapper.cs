@@ -10,8 +10,6 @@ namespace VehicleRegistrationReaderService.MUP
 
         Task<PersonalDataResponse> GetPersonalData(string readerName);
 
-        Task<RegistrationDataResponse> GetRegistrationData(string readerName);
-
         Task<DocumentDataResponse> GetDocumentData(string readerName);
 
         Task<VehicleDataResponse> GetVehicleData(string readerName);
