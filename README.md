@@ -19,13 +19,14 @@ e.g.
 ```
 ## Install as Windows service
 
-1. Download ``VehicleRegistrationReaderRoot.7z`` from the latest release.
+1. Download ``VehicleRegistrationReaderRoot.7z`` file from the latest release.
 2. Extract files to desired location where the application will be running.
-3. Run file ``install.exe`` as **administartor**.
+3. Run file ``install.exe`` as **administrator**.
+4. Go through installation steps that are shown in the console.
 
 ## Uninstall as Windows service
 1. Go to the **root** folder of the application.
-2. Run file ``uninstall.exe`` as **administartor**.
+2. Run file ``uninstall.exe`` as **administrator**.
 
 ## How to use
 Full API specification can be found in api-spec folder. To see the list of available methods and data models, you will need to open .yaml file in editor like swagger. 
@@ -33,4 +34,4 @@ Full API specification can be found in api-spec folder. To see the list of avail
 https://editor.swagger.io/
 ```
 ### Note
-Detailed description of property attributes can be found in ``eVehicleRegistrationAPI/eVehicle Registration SDK Korisnicko Uputstvo.pdf``
+Detailed description of property attributes can also be found in ``eVehicleRegistrationAPI/eVehicle Registration SDK Korisnicko Uputstvo.pdf``
