@@ -38,7 +38,23 @@ tags:
     description: Working with document data
   - name: Card readers
     description: Working with card readers
+  - name: Service
+    description: Use to manually interact with service
 paths:
+  /refresh:
+    post:
+      description: Refreshes smart card reader list
+      tags:
+        - Service
+      responses:
+        "200":
+          description: OK
+        "500":
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/error-details-response"
   /personal-data:
     get:
       description: Returns personal data information
