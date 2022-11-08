@@ -22,7 +22,9 @@ e.g.
 1. Download ``VehicleRegistrationReaderRoot.7z`` file from the latest release.
 2. Extract files to desired location where the application will be running.
 3. Run file ``install.exe`` as **administrator**.
-4. Go through installation steps that are shown in the console.
+4. Go through installation steps that are shown in the console. \
+**Note** - During the installation you might get a warning to install a certificate from vrcardreader.asseco-see.rs , click **Yes** to accept and install the certificate.
+5. After the installation is complete, you will have working windows service (VehicleRegistrationCardReaderService) running on your machine on both http and https on the ports which you selected during installation.
 
 ## Uninstall as Windows service
 1. Go to the **root** folder of the application.
