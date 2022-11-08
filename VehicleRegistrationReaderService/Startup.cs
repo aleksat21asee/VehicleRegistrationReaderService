@@ -43,8 +43,9 @@ namespace VehicleRegistrationReaderService
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime, ILogger<Startup> logger)
         {
             _logger = logger;
-            app.UseCors(
 
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyHeader()
             );
             if (env.IsDevelopment())
             {

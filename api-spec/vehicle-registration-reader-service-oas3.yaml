@@ -23,6 +23,12 @@ servers:
       port:
         enum: ['23784']
         default: '23784'
+  - description: Windows service (secure)
+    url: 'https://vrcardreader.asseco-see.rs:5002/v1/vehicle-registration-card-reader/'
+    variables:
+      port:
+        enum: ['5002']
+        default: '5002'
 tags:
   - name: Personal data
     description: Working with personal data
@@ -382,4 +388,3 @@ components:
         VehicleLoad:
           type: string  
           description: "Nosivost vozila"
-
