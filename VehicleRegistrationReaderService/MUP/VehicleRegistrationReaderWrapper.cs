@@ -27,7 +27,7 @@ namespace VehicleRegistrationReaderService.MUP
 
             var cardReaderList = new CardReaderList();
 
-            while ((VehicleRegistrationAPI.GetReaderName(cardReaderIndex++, readerName, ref bufferSize)) != VehicleRegistrationAPI.SCARD_E_UNKNOWN_READER)
+            while ((VehicleRegistrationAPI.GetReaderName(cardReaderIndex++, readerName, ref bufferSize)) == VehicleRegistrationAPI.S_OK)
             {
                 cardReaderList.CardReaders.Add(new CardReader { ReaderName = readerName.ToString() });
             }
@@ -118,6 +118,18 @@ namespace VehicleRegistrationReaderService.MUP
             }
 
             return _mapper.Map<RegistrationDataResponse>(registrationDataMUP);
+        }
+
+        public async Task RefreshService()
+        {
+            var status = VehicleRegistrationAPI.sdCleanup();
+
+            status = VehicleRegistrationAPI.sdStartup(1);
+            if (status != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdStartup", new ServiceException(VehicleRegistrationAPI.ResponseMessage(status)));
+            }
+
         }
     }
 }

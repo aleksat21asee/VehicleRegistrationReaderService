@@ -13,5 +13,7 @@ namespace VehicleRegistrationReaderService.MUP
         Task<DocumentDataResponse> GetDocumentData(string readerName);
 
         Task<VehicleDataResponse> GetVehicleData(string readerName);
+
+        Task RefreshService();
     }
 }

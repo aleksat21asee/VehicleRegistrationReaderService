@@ -51,5 +51,13 @@ namespace VehicleRegistrationReaderService.Controllers
             var result = await _vehicleRegistrationReaderWrapper.GetVehicleData(readerName);
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("refresh")]
+        public async Task<IActionResult> RefreshService()
+        {
+            await _vehicleRegistrationReaderWrapper.RefreshService();
+            return Ok();
+        }
     }
 }

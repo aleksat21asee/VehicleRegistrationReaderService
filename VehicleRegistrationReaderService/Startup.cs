@@ -79,7 +79,7 @@ namespace VehicleRegistrationReaderService
 
         private void OnStopped()
         {
-            var status = VehicleRegistrationAPI.sdSleanup();
+            var status = VehicleRegistrationAPI.sdCleanup();
             if (status != VehicleRegistrationAPI.S_OK)
             {
                 throw new WrapperException("sdCleanup", new ServiceException(VehicleRegistrationAPI.ResponseMessage(status)));

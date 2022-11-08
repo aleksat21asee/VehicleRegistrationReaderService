@@ -86,7 +86,7 @@ namespace VehicleRegistrationReaderService.MUP
         public static extern UInt32 sdStartup(Int32 version);
 
         [DllImport(DLL)] 
-        public static extern UInt32 sdSleanup();
+        public static extern UInt32 sdCleanup();
 
         [DllImport(DLL, CharSet = CharSet.Ansi)]
         public static extern UInt32 GetReaderName(UInt32 index, StringBuilder shortName, ref Int32 nameSize);
