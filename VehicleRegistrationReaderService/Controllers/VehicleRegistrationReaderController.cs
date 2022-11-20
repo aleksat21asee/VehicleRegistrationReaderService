@@ -52,6 +52,13 @@ namespace VehicleRegistrationReaderService.Controllers
             return Ok(result);
         }
 
+        [Route("combined-data")]
+        public async Task<ActionResult<CombinedData>> GetCombinedData(string readerName)
+        {
+            var result = await _vehicleRegistrationReaderWrapper.GetCombinedData(readerName);
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("refresh")]
         public async Task<IActionResult> RefreshService()
@@ -59,5 +66,7 @@ namespace VehicleRegistrationReaderService.Controllers
             await _vehicleRegistrationReaderWrapper.RefreshService();
             return Ok();
         }
+
+
     }
 }

@@ -131,5 +131,55 @@ namespace VehicleRegistrationReaderService.MUP
             }
 
         }
+
+        public async Task<CombinedData> GetCombinedData(string readerName)
+        {
+            SetupNewCard(readerName);
+
+            /* Vehicle data */
+            VehicleDataMUP vehicleDataMUP = new VehicleDataMUP();
+
+            var getVehicleDataStatus = VehicleRegistrationAPI.sdReadVehicleData(ref vehicleDataMUP);
+
+            if (getVehicleDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadVehicleData", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getVehicleDataStatus)));
+            }
+
+            var vehicleDataResponse = _mapper.Map<VehicleDataResponse>(vehicleDataMUP);
+
+            /* Document data */
+            DocumentDataMUP documentDataMUP = new DocumentDataMUP();
+
+            var getDocumentDataStatus = VehicleRegistrationAPI.sdReadDocumentData(ref documentDataMUP);
+
+            if (getDocumentDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadDocumentData", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getDocumentDataStatus)));
+            }
+
+            var documentDataResponse = _mapper.Map<DocumentDataResponse>(documentDataMUP);
+
+
+            /* Personal data */
+            PersonalDataMUP personalDataMUP = new PersonalDataMUP();
+
+            var getPersonalDataStatus = VehicleRegistrationAPI.sdReadPersonalData(ref personalDataMUP);
+
+            if (getPersonalDataStatus != VehicleRegistrationAPI.S_OK)
+            {
+                throw new WrapperException("sdReadPersonalData", new BadRequestException(VehicleRegistrationAPI.ResponseMessage(getPersonalDataStatus)));
+            }
+
+            var personalDataResponse = _mapper.Map<PersonalDataResponse>(personalDataMUP);
+
+            /* Combine results */
+            return new CombinedData()
+            {
+                VehicleData = vehicleDataResponse,
+                PersonalData = personalDataResponse,
+                DocumentData = documentDataResponse
+            };
+        }
     }
 }

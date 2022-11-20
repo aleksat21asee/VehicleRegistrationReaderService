@@ -14,6 +14,8 @@ namespace VehicleRegistrationReaderService.MUP
 
         Task<VehicleDataResponse> GetVehicleData(string readerName);
 
+        Task<CombinedData> GetCombinedData(string readerName);
+
         Task RefreshService();
     }
 }
