@@ -40,7 +40,42 @@ tags:
     description: Working with card readers
   - name: Service
     description: Use to manually interact with service
+  - name: Combined data
+    description: Working with all data from vehicle registration card
 paths:
+  /combined-data:
+    get:
+      description: Returns all the data from vehicle registration card
+      tags:
+        - Combined data
+      parameters:
+        - $ref: '#/components/parameters/reader-name-param'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/combined-data-response"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error-details-response"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error-details-response"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error-details-response"
+    
   /refresh:
     post:
       description: Refreshes smart card reader list
@@ -282,7 +317,18 @@ components:
         ReaderName:
           type: string
     
-        
+    combined-data-response:
+      type: object
+      properties:
+        DocumentData:
+          allOf:
+            - $ref: "#/components/schemas/document-data-response"
+        VehicleData:
+          allOf:
+            - $ref: "#/components/schemas/vehicle-data-response"
+        PersonalData:
+          allOf:
+            - $ref: "#/components/schemas/personal-data-response"
     personal-data-response:
       type: object
       properties:
