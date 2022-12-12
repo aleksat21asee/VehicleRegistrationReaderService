@@ -32,7 +32,8 @@ b) Install with powershell script
 2. Extract files to desired location where the application will be running.
 3. Open powershell as **administrator**
 4. Position to the installation folder
-5. Run ``.\install.ps1``
+5. Run ``.\install.ps1`` \
+**Note** - During the installation you might get a warning to install a certificate from vrcardreader.asseco-see.rs , click **Yes** to accept and install the certificate.
 6. After the installation is complete, you will have working windows service (VehicleRegistrationCardReaderService) running on your machine on both http and https on the ports which you selected during installation. \
 \
 **Note** - Ports can be configured by running script with appropriate arguments: ```.\install.ps1 <port number> <ssl port number>``` . Default ports are 61408 for HTTP and 5002 for HTTPS.
