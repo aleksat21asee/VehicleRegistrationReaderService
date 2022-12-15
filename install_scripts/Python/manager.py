@@ -81,7 +81,7 @@ class ServiceManager:
         cmd = f'''
         \n $pwd = ConvertTo-SecureString -String "{self.cert_password}" -Force -AsPlainText
         \n Get-ChildItem -Path cert:\localMachine\my\ | Where-Object {{ $_.subject -eq "CN={self.cert_host}"}} | Export-PfxCertificate -FilePath "{self.cert_path}" -Password $pwd
-        \n Import-PfxCertificate -FilePath "{self.cert_path}" -CertStoreLocation cert:\CurrentUser\Root -Password $pwd
+        \n Import-PfxCertificate -FilePath "{self.cert_path}" -CertStoreLocation cert:\LocalMachine\Root -Password $pwd
         \n
         '''
         action_status, completed_process = executor.execute_command(cmd, f'Loading certficate...')

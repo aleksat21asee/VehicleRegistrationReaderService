@@ -66,7 +66,7 @@ Get-ChildItem -Path cert:\localMachine\my\ | Where-Object { $_.subject -eq "CN=$
 
 # import certificate
 # $pwd = ConvertTo-SecureString -String $certPassword -Force -AsPlainText
-Import-PfxCertificate -FilePath "$solutionPath/$certName" -CertStoreLocation cert:\CurrentUser\Root -Password $pwd
+Import-PfxCertificate -FilePath "$solutionPath/$certName" -CertStoreLocation cert:\LocalMachine\Root -Password $pwd
 
 # install service
 If(Get-Service -Name $serviceName -ErrorAction SilentlyContinue)
